@@ -56,23 +56,18 @@ Note: gopsutil v2 breaks compatibility. If you want to stay with compatibility, 
 
 .. code:: go
 
-   package main
+package main
 
-   import (
-       "fmt"
+import (
+	"fmt"
 
-       "github.com/shirou/gopsutil/mem"
-   )
+	"github.com/shirou/gopsutil/mem"
+)
 
-   func main() {
-       v, _ := mem.VirtualMemory()
-
-       // almost every return value is a struct
-       fmt.Printf("Total: %v, Free:%v, UsedPercent:%f%%\n", v.Total, v.Free, v.UsedPercent)
-
-       // convert to JSON. String() is also implemented
-       fmt.Println(v)
-   }
+func main() {
+	v, _ := mem.VirtualMemory()
+	fmt.Printf( "总内存:%fG,释放:%d,使用百分比%f\n",float64(v.Total)/1024/1024/1024, v.Free, v.UsedPercent)
+}
 
 The output is below.
 
